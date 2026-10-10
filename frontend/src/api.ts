@@ -22,7 +22,7 @@ export async function getEmployees(params: { search?: string; country?: string; 
       rows = rows.filter(e => [e.full_name, e.employee_number, e.email].some(v => v.toLowerCase().includes(q)));
     }
     if (params.country) rows = rows.filter(e => e.country_code === params.country);
-    if (params.department) rows = rows.filter(e => e.department === params.department);
+    if (params.department) rows = rows.filter(e => String(e.department_id) === params.department);
     if (params.status) rows = rows.filter(e => e.employment_status === params.status);
     const page = params.page || 1; const perPage = params.perPage || 25;
     return { data: rows.slice((page - 1) * perPage, page * perPage), meta: { page, per_page: perPage, total: rows.length, total_pages: Math.ceil(rows.length / perPage) } };

@@ -33,7 +33,7 @@ employees = Employee.order(:employee_number).pluck(:id, :employee_number, :count
 employees.each_with_index do |(id, number, country), i|
   salary = 42_000 + ((i * 137) % 98_000)
   salary_batch << { employee_id: id, amount: salary, currency: currencies.fetch(country, "USD"),
-    pay_frequency: i % 12 == 0 ? "monthly" : "annual", effective_from: base + (i % 900), effective_to: nil,
+    pay_frequency: "annual", effective_from: base + (i % 900), effective_to: nil,
     created_at: now, updated_at: now }
 end
 salary_batch.each_slice(1000) { |slice| SalaryRecord.insert_all!(slice) }

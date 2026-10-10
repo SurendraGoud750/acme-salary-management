@@ -11,7 +11,7 @@ export function createDemoEmployees(count = 10000): Employee[] {
   return Array.from({ length: count }, (_, i) => {
     const country = countries[i % countries.length];
     const salary: Salary = { id: i + 1, amount: money(42000 + ((i * 137) % 98000)), currency: currencies[country],
-      pay_frequency: i % 12 === 0 ? 'monthly' : 'annual', effective_from: `${2022 + (i % 4)}-01-01`, effective_to: null };
+      pay_frequency: 'annual', effective_from: `${2022 + (i % 4)}-01-01`, effective_to: null };
     const first = firstNames[(i * 7) % firstNames.length];
     const last = lastNames[(i * 11) % lastNames.length] + (i % 9 === 0 ? 'son' : '');
     return { id: i + 1, employee_number: `EMP-${String(i + 1).padStart(5, '0')}`, first_name: first, last_name: last,
