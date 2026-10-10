@@ -1,7 +1,9 @@
 require "securerandom"
 
 departments = %w[Engineering Product Finance People Sales Operations Legal Marketing Support]
-Department.insert_all!(departments.map { |name| { name: name, created_at: Time.current, updated_at: Time.current } }, unique_by: :name)
+departments.each do |name|
+  Department.find_or_create_by!(name: name)
+end
 department_ids = Department.order(:id).pluck(:id)
 countries = %w[IN US GB DE CA AU SG NL FR JP]
 first_names = %w[Aarav Aditi Arjun Anaya Dev Diya Ishaan Kavya Liam Maya Noah Olivia Rohan Sara Theo Zara]
